@@ -13,4 +13,4 @@ var greet2 = fs.readFile(__dirname + '/greet.txt', 'utf-8', function(err, data){
     console.log(data);
 });
 
-console.log()
+console.log('Done');
