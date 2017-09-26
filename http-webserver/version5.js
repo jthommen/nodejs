@@ -9,20 +9,28 @@ var port = process.env.PORT || 3000;
 // Static Files served via express middleware
 app.use('/assets', express.static(__dirname + '/public'));
 
+// Own middleware possible
+app.use('/', function(req, res, next){
+    console.log('Request Url: ' + req.url);
+    next();
+});
+
+// Templating engine for express js: ejs
+app.set('view engine', 'ejs');
+
 // Maps requet type to url and fires callback
 app.get('/', function(req, res){
-    res.send('<html><head><title>Hello</title></head><body><h1>Hello there!</h1></body></html>')
+    res.render('index');
 });
 
 // Dynamic routes with pattern matching & params
 app.get('/person/:id', function(req, res){
-    res.send('<html><head><link href="/assets/style.css" type="text/css" rel="stylesheet"/><title>Hello</title></head><body><h1>Hello ' + req.params.id +'!</h1></body></html>')
+    res.render('person', { ID: req.params.id });
 });
 
 app.get('/json', function(req, res){
    res.json({ firstname: 'John', lastname: 'Doe' }); 
 });
-
 
 // Creates HTTP Server on Port
 app.listen(port);
