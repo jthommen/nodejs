@@ -11,14 +11,26 @@ var fs = require('fs');
 // creates server object that takes in function which is an event emitter
 http.createServer(function(req, res){ //request is not further processed here
 
-    // function is run when a req causes an event emit
-    res.writeHead(200, { 'Content-Type' : 'application/json' }); // arguments are status, headers
+    if(req.url === '/api') {
+        // function is run when a req causes an event emit
+        res.writeHead(200, { 'Content-Type' : 'application/json' }); // arguments are status, headers
+    
+        var obj = {
+            firstname: 'Juri',
+            lastname: 'Thommen'
+        };
+        res.end(JSON.stringify(obj));
+    }
 
-    var obj = {
-        firstname: 'Juri',
-        lastname: 'Thommen'
-    };
-    res.end(JSON.stringify(obj));
+    else if (req.url === '/') {
+        fs.createReadStream(__dirname + '/index.html', 'utf8').pipe(res);
+
+    // Some error handling    
+    } else {
+        res.writeHead(404);
+        res.end();
+    }
+    
 
     // Specifying the port & address to map the server object to
 }).listen(1337, '127.0.0.1');
