@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="http://www.aetherwings.com/images/logo.png"/>
         <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         <title>NodeJS Webserver Project</title>
         <style>
@@ -15,6 +16,24 @@
     </head>
     <body>
         <h2>NodeJS Webserver Project</h2>
-        <h3>{Message}</h3>
+        <form action="/person" method="POST">
+            <label for="firstname">Firstname: </label> </br>
+            <input type="text" id="firstname" name="firstname"></br>
+            <label for="lastname">Lastname: </label></br>
+            <input type="text" id="lastname" name="lastname"></br>
+            <input type="submit" value="Submit">
+        </form>
+        <script>
+            $.ajax({
+                type: "POST",
+                url: "/personjson",
+                data: JSON.stringify({
+                    firstname: 'Jane',
+                    lastname: 'Doe'
+                }),
+                dataType: 'json',
+                contentType: 'application/json'
+            });
+        </script>
     </body>
 </html>
