@@ -1,12 +1,11 @@
 var express = require('express');
 
-// Middleware to parse POST request bodies
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({extended: false});
-var jsonParser = bodyParser.json();
-
 // Create express app that returns function
 var app = express();
+
+// Require controller modules
+var apiController = require('./controllers/apiController');
+var htmlController = require('./controllers/htmlController');
 
 // use port variable or set default
 var port = process.env.PORT || 3000; 
@@ -28,27 +27,9 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
-// Dynamic routes with pattern matching & params
-app.get('/person/:id', function(req, res){
-    res.render('person', { ID: req.params.id, Qstr: req.query.qstr });
-});
-
-// Form via post & bodyparser
-app.post('/person', urlencodedParser, function(req, res){
-    res.send('Thank you!');
-    console.log(req.body.firstname);
-    console.log(req.body.lastname);    
-});
-
-app.post('/personjson', jsonParser, function(req, res){
-    res.send('Thank you for the JSON data!');
-    console.log(req.body.firstname);
-    console.log(req.body.lastname);  
-});
-
-app.get('/json', function(req, res){
-   res.json({ firstname: 'John', lastname: 'Doe' }); 
-});
+// Gives the controller the main app object
+htmlController(app);
+apiController(app);
 
 // Creates HTTP Server on Port
 app.listen(port);
