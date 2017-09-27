@@ -11,7 +11,7 @@ var app = express();
 var mongoose = require('mongoose');
 
 // Connect to DB
-mongoose.connect('mongodb://juri:test@ds147454.mlab.com:47454/mongoose-dev');
+mongoose.connect('mongodb://juri:<password>@ds147454.mlab.com:47454/mongoose-dev');
 // Schema construction
 var Schema = mongoose.Schema;
 
