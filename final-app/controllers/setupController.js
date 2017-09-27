@@ -6,17 +6,17 @@ module.exports = function(app){
         // Seed database --> can also use fake data generator beta.json-generator.com
         var starterTodos = [
             {
-                username: 'Test',
+                username: 'test',
                 todo: 'Buy Stuff',
                 isDone: false,
                 hasAttachement: false
             },{
-                username: 'Test2',
+                username: 'test',
                 todo: 'Do Stuff',
                 isDone: false,
                 hasAttachement: false
             },{
-                username: 'Test3',
+                username: 'test',
                 todo: 'Clean up Stuff',
                 isDone: false,
                 hasAttachement: false

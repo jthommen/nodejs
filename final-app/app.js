@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 // Require controllers
 var setupController = require('./controllers/setupController');
+var apiController = require('./controllers/apiController');
 
 var port  = process.env.PORT || 3000;
 
@@ -15,7 +16,8 @@ app.set('view engine', 'ejs');
 // Connect to DB
 mongoose.connect(config.getDbConnectionString());
 
-// Add endpoint to express app
+// Add endpoints to express app
 setupController(app);
+apiController(app);
 
 app.listen(port);
