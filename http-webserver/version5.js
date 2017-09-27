@@ -13,7 +13,7 @@ var port = process.env.PORT || 3000;
 // Static Files served via express middleware
 app.use('/assets', express.static(__dirname + '/public'));
 
-// Own middleware possible
+// Own middleware possible:
 app.use('/', function(req, res, next){
     console.log('Request Url: ' + req.url);
     next();
